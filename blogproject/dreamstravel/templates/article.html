@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Article {% endblock %}
+{% block content %}
+
+<!--- Article --->
+
+<div class="card art mb-3">
+    <div class="row g-0">
+<img id="article" src="{{articleDetail.articles_image.url}}">
+<h2>{{articleDetail.articles_name}}</h2>
+<p> {{articleDetail.articles_description}}</p>
+</div> 
+<form method="POST">
+    {% csrf_token %}
+    <div class="row">
+      {% for email in form %}
+      <div id="comment" class="col-md-12 mt-5">
+       <label class="form-label">{{ email.label }}</label>
+        {{ email }}
+      </div>
+      {% endfor %}
+    </div>
+    <a href="{% url 'article' %}"><input id="comment-two" class="submit" type="submit" value="Comment"></a>
+    {% comment %}
+    <div id="comment" class="col-md-12">
+        <label for="emailInfo" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" id="email" placeholder="Please enter your e-mail here" required>
+    </div>
+    <div id="comment" class="col-md-12">
+    <label for="comments" class="form-label">Comment</label>
+    <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="Please enter your comment here" required></textarea>
+    </div>
+    {% endcomment %}
+  </form>
+    </div>
+
+<!--- Comments --->
+
+<div class="container">
+ <div class="row">
+    <h2>Comments:</h2>
+    {% for comments in different %}
+  <div class="comment-three">
+    <img id="avatar" src="{% static 'images/User_Avatar.png' %}">
+    <h4>&nbsp "{{comments.comments_email}}" &nbsp on {{comments.comments_at}} &nbsp commented as below:</h4>
+    <textarea class="form-control" rows="3">{{comments.comments_lines}}</textarea>
+  </div>
+  {% endfor %}
+ </div>
+</div>
+
+{% endblock %}

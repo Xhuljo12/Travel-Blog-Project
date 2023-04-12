@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Search {% endblock %}
+{% block content %}
+
+<div class="about next">
+    {% if searched %}
+    <h1>You are searching for {{ searched }}</h1>
+    <br>
+    {% for articleDetail in searching %}
+    <div class="col-12 col-md-6 art find">
+        <img src="{{articleDetail.articles_image.url}}" class="img-fluid">
+        <h3>{{articleDetail.articles_name}}</h3>
+        <p>{{articleDetail.articles_lines}}</p>
+          <a href="../article/{{articleDetail.articles_id}}"><button id="button">Read More</button></a>
+      </div>
+    {% endfor %}
+
+    {% else %}
+    <h1>Sorry, none of the articles on this webpage are related to your search.</h1>
+    {% endif %}
+
+    
+</div>
+
+
+{% endblock %}

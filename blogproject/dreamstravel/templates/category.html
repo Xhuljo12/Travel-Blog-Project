@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Category {% endblock %}
+{% block content %}
+
+<!--- Articles Category--->
+
+<div class="container">
+ <div class="row">
+    {% for article in categori %}
+  <div class="read card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{article.articles_image.url}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title">{{article.articles_name}}</h4>
+          <p>{{article.articles_lines}}</p>
+          <a href="../article/{{article.articles_id}}"><button id="button">Read More</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+ </div>
+</div>
+
+{% endblock %}

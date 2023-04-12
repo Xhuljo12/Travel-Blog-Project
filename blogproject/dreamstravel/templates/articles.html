@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Articles {% endblock %}
+{% block content %}
+
+<!--- Articles --->
+
+<div class="container">
+ <div class="row">
+    {% for article in articles %}
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{article.articles_image.url}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title">{{article.articles_name}}</h4>
+          <p>{{article.articles_lines}}</p>
+          <a href="../article/{{article.articles_id}}"><button id="button">Read More</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+ </div>
+</div>
+
+{% if articles.has_previous %}
+<a id="paginator" href="{% url 'articles' %}?page={{articles.previous_page_number}}"><input class="submission" type="submit" value="Previous Page"></a>
+{% endif %}
+{% if articles.has_next %}
+<a id="paginator" href="{% url 'articles' %}?page={{articles.next_page_number}}"><input class="submission" type="submit" value="Next Page"></a>
+{% endif %}
+
+{% endblock %}
